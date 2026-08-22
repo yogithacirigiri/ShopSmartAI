@@ -1,12 +1,10 @@
-import os
 import pyodbc
-import psycopg2
 import pandas as pd
 
 SERVER = r"localhost\SQLEXPRESS"
 DATABASE = "ShopSmartDB"
 
-SQL_SERVER_CONNECTION = (
+CONNECTION_STRING = (
     "DRIVER={ODBC Driver 17 for SQL Server};"
     f"SERVER={SERVER};"
     f"DATABASE={DATABASE};"
@@ -15,14 +13,7 @@ SQL_SERVER_CONNECTION = (
 
 
 def get_connection():
-    # Render PostgreSQL
-    database_url = os.getenv("DATABASE_URL")
-
-    if database_url:
-        return psycopg2.connect(database_url)
-
-    # Local MS SQL Server
-    return pyodbc.connect(SQL_SERVER_CONNECTION)
+    return pyodbc.connect(CONNECTION_STRING)
 
 
 def get_products():
@@ -50,11 +41,11 @@ def get_sales():
 
     query = """
     SELECT
-        OrderID,
-        CustomerID,
-        OrderDate,
-        TotalAmount
-    FROM Orders
+        o.OrderID,
+        o.CustomerID,
+        o.OrderDate,
+        o.TotalAmount
+    FROM Orders o
     """
 
     df = pd.read_sql(query, connection)
@@ -79,7 +70,7 @@ def get_customer_orders(customer_id):
         ON o.OrderID = od.OrderID
     JOIN Products p
         ON od.ProductID = p.ProductID
-    WHERE o.CustomerID = %s
+    WHERE o.CustomerID = ?
     """
 
     df = pd.read_sql(query, connection, params=[customer_id])
