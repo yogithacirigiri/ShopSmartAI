@@ -1,8 +1,3 @@
-Yes. Here is **one complete, clean README.md** with the 3 screenshots shown as previews and **clickable to open the full image**.
-
-Replace your entire `README.md` with this:
-
-````markdown
 # ShopSmart AI 🛍️🤖
 
 ShopSmart AI is a full-stack AI-powered e-commerce application that combines Machine Learning, FastAPI REST APIs, Microsoft SQL Server, Python data analytics, and a responsive web frontend.
