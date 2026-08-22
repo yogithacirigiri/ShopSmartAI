@@ -1,25 +1,15 @@
-Your README content is good, but there is **one important problem**: the screenshot paths are pointing to your **Windows computer paths**. Those will not work for people viewing your GitHub repository.
+Yes. Here is **one complete, clean README.md** with the 3 screenshots shown as previews and **clickable to open the full image**.
 
-You currently have:
-
-```markdown
-![ShopSmart AI Website]("C:\Users\C.Yogitha\OneDrive\Documents\ShopSmartDB\ss\shop smart ai.png")
-```
-
-GitHub needs the **repository-relative path** instead:
-
-```markdown
-![ShopSmart AI Website](ss/shop%20smart%20ai.png)
-```
-
-Also, your Markdown has a lot of unnecessary `**` and escaped characters because it looks like it was copied from formatted text.
-
-### I recommend replacing your entire README with this clean version
+Replace your entire `README.md` with this:
 
 ````markdown
 # ShopSmart AI 🛍️🤖
 
-ShopSmart AI is a full-stack AI-powered e-commerce application that combines machine learning, REST APIs, SQL Server, and a web-based frontend to provide intelligent product recommendations and sales insights.
+ShopSmart AI is a full-stack AI-powered e-commerce application that combines Machine Learning, FastAPI REST APIs, Microsoft SQL Server, Python data analytics, and a responsive web frontend.
+
+The application provides AI-based product recommendations and sales insights through an interactive web application and Power BI dashboard.
+
+---
 
 ## 🚀 Features
 
@@ -33,9 +23,11 @@ ShopSmart AI is a full-stack AI-powered e-commerce application that combines mac
 - 📈 Power BI sales dashboard
 - 💻 Responsive web interface
 
+---
+
 ## 🧠 AI Recommendation System
 
-ShopSmart AI uses a content-based recommendation approach.
+ShopSmart AI uses a **content-based product recommendation system**.
 
 The recommendation engine uses:
 
@@ -46,20 +38,58 @@ The recommendation engine uses:
 
 When a user selects a product, the system analyzes product similarity and recommends similar products.
 
+### Recommendation Process
+
+```text
+Product Selection
+       ↓
+Product Name + Category
+       ↓
+TF-IDF Vectorization
+       ↓
+Cosine Similarity
+       ↓
+Similar Products
+       ↓
+AI Recommendations
+````
+
+---
+
 ## 🏗️ System Architecture
 
 ```text
-Frontend
-HTML + CSS + JavaScript
-        ↓
-FastAPI REST API
-        ↓
-Python AI/ML Model
-        ↓
-Microsoft SQL Server
-````
+                    ShopSmart AI
+                         │
+                         ▼
+              HTML + CSS + JavaScript
+                         │
+                         ▼
+                  FastAPI REST API
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+       Python AI/ML Model     SQL Server Database
+              │                     │
+              ▼                     ▼
+      TF-IDF + Cosine       Products / Customers
+         Similarity          Orders / Categories
+              │
+              └──────────┬──────────┘
+                         ▼
+                  Application Results
 
-Power BI is also connected to the database for sales analytics.
+
+             SQL Server Database
+                       │
+                       ▼
+                   Power BI
+                       │
+                       ▼
+              Sales Dashboard
+```
+
+---
 
 ## 🛠️ Technology Stack
 
@@ -78,7 +108,7 @@ Power BI is also connected to the database for sales analytics.
 ### AI / Machine Learning
 
 * Scikit-learn
-* TF-IDF
+* TF-IDF Vectorization
 * Cosine Similarity
 
 ### Database
@@ -98,10 +128,12 @@ Power BI is also connected to the database for sales analytics.
 * Git
 * GitHub
 
+---
+
 ## 📁 Project Structure
 
 ```text
-ShopSmartDB/
+ShopSmartAI/
 │
 ├── app/
 │   ├── __init__.py
@@ -125,9 +157,25 @@ ShopSmartDB/
 └── .gitignore
 ```
 
+---
+
 ## 🗄️ Database
 
-The application uses the following SQL Server tables:
+The application uses **Microsoft SQL Server**.
+
+### Database
+
+```text
+ShopSmartDB
+```
+
+### SQL Server Instance
+
+```text
+localhost\SQLEXPRESS
+```
+
+### Tables
 
 * Customers
 * Categories
@@ -135,7 +183,7 @@ The application uses the following SQL Server tables:
 * Orders
 * OrderDetails
 
-### Main relationships
+### Database Relationships
 
 ```text
 Customers
@@ -149,49 +197,105 @@ Products
 Categories
 ```
 
+---
+
 ## 📊 Business Insights
 
-The current dataset contains 15 orders.
+The current dataset contains **15 orders**.
 
-Key findings include:
+Key findings from the dataset:
 
-* January is the best-performing month with ₹95,996 revenue.
-* Customer 1 generated ₹89,997 revenue.
-* Apple iPhone 15 generated ₹159,998 revenue.
-* Electronics is the highest-revenue category with ₹395,991.
-* Average order value is approximately ₹23,685.53.
+| Business Metric       |          Result |
+| --------------------- | --------------: |
+| Best Performing Month |         January |
+| January Revenue       |         ₹95,996 |
+| Top Customer          |      Customer 1 |
+| Top Customer Revenue  |         ₹89,997 |
+| Top Product           | Apple iPhone 15 |
+| Top Product Revenue   |        ₹159,998 |
+| Top Category          |     Electronics |
+| Electronics Revenue   |        ₹395,991 |
+| Average Order Value   |      ₹23,685.53 |
+
+These insights were generated using **Python and Pandas** and visualized using **Power BI**.
+
+---
+
+## 📈 Power BI Dashboard
+
+The project includes an interactive Power BI sales dashboard containing:
+
+* Total Revenue
+* Total Orders
+* Average Order Value
+* Monthly Revenue
+* Revenue by Category
+* Top Products by Revenue
+* Top Customers by Revenue
+* Category filter
+* Order Date filter
+
+---
+
+## 📸 Project Screenshots
+
+### 🛍️ ShopSmart AI Website
+
+[![ShopSmart AI Website](ss/shop%20smart%20ai.png)](ss/shop%20smart%20ai.png)
+
+**Click the image to view the full-size screenshot.**
+
+---
+
+### 🤖 AI Product Recommendation
+
+[![AI Product Recommendation](ss/shop%20smart%20ai%202%20.png)](ss/shop%20smart%20ai%202%20.png)
+
+**Click the image to view the full-size screenshot.**
+
+---
+
+### 📊 Power BI Sales Dashboard
+
+[![Power BI Sales Dashboard](ss/shopsmart%20dashboad.png)](ss/shopsmart%20dashboad.png)
+
+**Click the image to view the full-size screenshot.**
+
+---
 
 ## ⚙️ Installation
 
-### Clone the repository
+### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/yogithacirigiri/ShopSmartAI.git
 ```
 
-### Move into the project
+### 2. Open the project
 
 ```bash
-cd ShopSmartDB
+cd ShopSmartAI
 ```
 
-### Create a virtual environment
+### 3. Create a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-### Activate it on Windows
+### 4. Activate the virtual environment on Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
-### Install dependencies
+### 5. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+
+---
 
 ## 🔌 Database Configuration
 
@@ -207,7 +311,17 @@ Database:
 ShopSmartDB
 ```
 
-Make sure SQL Server Express is running and the required database and tables are available.
+Make sure:
+
+1. SQL Server Express is installed.
+2. SQL Server is running.
+3. The `ShopSmartDB` database exists.
+4. The required tables are available.
+5. Windows Authentication is configured.
+
+> Note: This project is currently configured for local SQL Server development.
+
+---
 
 ## ▶️ Run the Application
 
@@ -217,7 +331,7 @@ Start the FastAPI server:
 python -m uvicorn app.main:app
 ```
 
-Open the application:
+Open the application in your browser:
 
 ```text
 http://127.0.0.1:8000
@@ -229,60 +343,40 @@ FastAPI API documentation:
 http://127.0.0.1:8000/docs
 ```
 
+---
+
 ## 🔗 API Endpoints
 
-| Endpoint                    | Description            |
-| --------------------------- | ---------------------- |
-| `/`                         | Web application        |
-| `/products`                 | Get products           |
-| `/recommend/{product_name}` | Get AI recommendations |
-| `/customer/{customer_id}`   | Get customer orders    |
-| `/analytics`                | Get sales analytics    |
+| Endpoint                    | Description                    |
+| --------------------------- | ------------------------------ |
+| `/`                         | Web application                |
+| `/products`                 | Get available products         |
+| `/recommend/{product_name}` | Get AI product recommendations |
+| `/customer/{customer_id}`   | Get customer orders            |
+| `/analytics`                | Get sales analytics            |
 
-## 📈 Power BI Dashboard
-
-The project also includes a Power BI sales dashboard containing:
-
-* Total Revenue
-* Total Orders
-* Average Order Value
-* Monthly Revenue
-* Revenue by Category
-* Top Products by Revenue
-* Top Customers by Revenue
-* Category filter
-* Order Date filter
-
-## 📸 Project Screenshots
-
-### ShopSmart AI Website
-
-![ShopSmart AI Website](ss/shop%20smart%20ai.png)
-
-### AI Product Recommendation
-
-![AI Recommendation](ss/shop%20smart%20ai%202%20.png)
-
-### Power BI Sales Dashboard
-
-![Power BI Dashboard](ss/shopsmart%20dashboad.png)
+---
 
 ## 🔮 Future Improvements
 
-* Sales prediction using machine learning
-* Customer segmentation
-* Personalized recommendations
-* AI chatbot
-* User authentication
-* Shopping cart and checkout
-* Cloud deployment
-* Real-time recommendation updates
+* 📈 Sales prediction using Machine Learning
+* 👥 Customer segmentation
+* 🎯 Personalized recommendations
+* 🤖 AI chatbot
+* 🔐 User authentication
+* 🛒 Shopping cart and checkout
+* ⚡ Real-time recommendation updates
+* ☁️ Cloud deployment
+
+---
 
 ## 👩‍💻 Author
 
 **Yogitha Cirigiri**
 
 B.Tech – Computer Science & Engineering (AI & ML)
+
+---
 
 ## ⭐ Project Goal
 
@@ -293,4 +387,3 @@ The goal of ShopSmart AI is to demonstrate the integration of:
 in a practical e-commerce application.
 
 ````
-
