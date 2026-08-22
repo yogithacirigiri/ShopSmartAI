@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-pyodbc
 pandas
 scikit-learn
 psycopg2-binary
+pyodbc

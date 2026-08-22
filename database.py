@@ -1,143 +1,76 @@
-import pyodbc
+import os
 import pandas as pd
-
-# SQL Server connection
-server = r"localhost\SQLEXPRESS"
-database = "ShopSmartDB"
-
-connection_string = (
-    "DRIVER={ODBC Driver 17 for SQL Server};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    "Trusted_Connection=yes;"
-)
-
-connection = pyodbc.connect(connection_string)
-
-# =========================================================
-# 1. MONTHLY REVENUE
-# =========================================================
-
-query = "SELECT * FROM Orders"
-
-orders_df = pd.read_sql(query, connection)
-
-orders_df["OrderDate"] = pd.to_datetime(orders_df["OrderDate"])
-orders_df["Month"] = orders_df["OrderDate"].dt.month_name()
-
-monthly_revenue = orders_df.groupby("Month")["TotalAmount"].sum()
-
-print("\nMonthly Revenue:")
-print(monthly_revenue)
-
-best_month = monthly_revenue.idxmax()
-best_revenue = monthly_revenue.max()
-
-print("\nBest Performing Month:")
-print(best_month, "₹", best_revenue)
+import psycopg2
 
 
-# =========================================================
-# 2. TOP CUSTOMER
-# =========================================================
+def get_connection():
+    database_url = os.getenv("DATABASE_URL")
 
-customer_revenue = orders_df.groupby("CustomerID")["TotalAmount"].sum()
+    if not database_url:
+        raise Exception("DATABASE_URL is not configured")
 
-top_customer = customer_revenue.idxmax()
-top_customer_revenue = customer_revenue.max()
-
-print("\nTop Customer:")
-print("Customer ID:", top_customer)
-print("Revenue: ₹", top_customer_revenue)
+    return psycopg2.connect(database_url)
 
 
-# =========================================================
-# 3. TOP PRODUCT
-# =========================================================
+def get_products():
+    connection = get_connection()
 
-query = """
-SELECT
-    p.ProductID,
-    p.ProductName,
-    SUM(od.Quantity) AS TotalQuantity,
-    SUM(od.Quantity * od.Price) AS Revenue
-FROM OrderDetails od
-JOIN Products p
-    ON od.ProductID = p.ProductID
-GROUP BY
-    p.ProductID,
-    p.ProductName
-ORDER BY Revenue DESC
-"""
+    query = """
+        SELECT
+            p."ProductID",
+            p."ProductName",
+            p."CategoryID",
+            c."CategoryName"
+        FROM "Products" p
+        JOIN "Categories" c
+            ON p."CategoryID" = c."CategoryID"
+    """
 
-product_df = pd.read_sql(query, connection)
+    df = pd.read_sql_query(query, connection)
 
-print("\nProduct Revenue:")
-print(product_df)
+    connection.close()
 
-top_product = product_df.iloc[0]
-
-print("\nTop Product:")
-print("Product:", top_product["ProductName"])
-print("Quantity Sold:", top_product["TotalQuantity"])
-print("Revenue: ₹", top_product["Revenue"])
+    return df
 
 
-# =========================================================
-# 4. TOP CATEGORY
-# =========================================================
+def get_sales():
+    connection = get_connection()
 
-query = """
-SELECT
-    c.CategoryID,
-    c.CategoryName,
-    SUM(od.Quantity * od.Price) AS Revenue
-FROM OrderDetails od
-JOIN Products p
-    ON od.ProductID = p.ProductID
-JOIN Categories c
-    ON p.CategoryID = c.CategoryID
-GROUP BY
-    c.CategoryID,
-    c.CategoryName
-ORDER BY Revenue DESC
-"""
+    query = """
+        SELECT
+            "OrderID",
+            "CustomerID",
+            "OrderDate",
+            "TotalAmount"
+        FROM "Orders"
+    """
 
-category_df = pd.read_sql(query, connection)
+    df = pd.read_sql_query(query, connection)
 
-print("\nCategory Revenue:")
-print(category_df)
+    connection.close()
 
-top_category = category_df.iloc[0]
-
-print("\nTop Category:")
-print("Category:", top_category["CategoryName"])
-print("Revenue: ₹", top_category["Revenue"])
+    return df
 
 
-# =========================================================
-# 5. DATASET INFORMATION
-# =========================================================
+def get_customer_orders(customer_id):
+    connection = get_connection()
 
-print("\nDataset Information:")
-print(orders_df.info())
+    query = """
+        SELECT
+            "OrderID",
+            "CustomerID",
+            "OrderDate",
+            "TotalAmount"
+        FROM "Orders"
+        WHERE "CustomerID" = %s
+    """
 
+    df = pd.read_sql_query(
+        query,
+        connection,
+        params=(customer_id,)
+    )
 
-# =========================================================
-# 6. BASIC STATISTICS
-# =========================================================
+    connection.close()
 
-print("\nBasic Statistics:")
-print(orders_df.describe())
-
-
-# =========================================================
-# 7. DATA TYPES
-# =========================================================
-
-print("\nData Types:")
-print(orders_df.dtypes)
-
-
-# Close connection
-connection.close()
+    return df
