@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSmart AI</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">ShopSmart AI</div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#ai">AI Assistant</a>
+            <a href="#analytics">Analytics</a>
+        </div>
+    </nav>
+
+
+    <section id="home" class="hero">
+
+        <div class="hero-text">
+
+            <h1>Smart Shopping with AI</h1>
+
+            <p>
+                Discover products, get intelligent recommendations,
+                and explore your shopping insights.
+            </p>
+
+            <a href="#ai" class="button">
+                Try AI Recommendations
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section id="products">
+
+        <h2>Products</h2>
+
+        <div id="product-list" class="product-grid">
+            Loading products...
+        </div>
+
+    </section>
+
+
+    <section id="ai">
+
+        <h2>AI Product Recommendation</h2>
+
+        <p>
+            Select a product and let ShopSmart AI recommend similar products.
+        </p>
+
+        <select id="productSelect">
+            <option value="">Select a product</option>
+        </select>
+
+        <button onclick="getRecommendations()">
+            Get AI Recommendations
+        </button>
+
+        <div id="recommendations" class="product-grid"></div>
+
+    </section>
+
+
+    <section id="analytics">
+
+        <h2>ShopSmart Analytics</h2>
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3>Total Revenue</h3>
+                <p id="revenue">Loading...</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Orders</h3>
+                <p id="orders">Loading...</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Average Order</h3>
+                <p id="average">Loading...</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>ShopSmart AI © 2026</p>
+    </footer>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
