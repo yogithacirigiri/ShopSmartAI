@@ -1,4 +1,4 @@
-# ShopSmart AI 🛍️🤖
+## ShopSmart AI 🛍️🤖
 
 ShopSmart AI is a full-stack AI-powered e-commerce application that combines Machine Learning, FastAPI REST APIs, Microsoft SQL Server, Python data analytics, and a responsive web frontend.
 
@@ -367,7 +367,7 @@ http://127.0.0.1:8000/docs
 
 ## 👩‍💻 Author
 
-**Yogitha Cirigiri**
+## Yogitha Cirigiri
 
 B.Tech – Computer Science & Engineering (AI & ML)
 
@@ -380,5 +380,8 @@ The goal of ShopSmart AI is to demonstrate the integration of:
 **AI + Machine Learning + Full-Stack Development + SQL + Data Analytics**
 
 in a practical e-commerce application.
+
+https://github.com/user-attachments/assets/9cfd9b30-9c86-48d1-a77d-158d94ff2112
+
 
 ````
